@@ -1,0 +1,25 @@
+FRAUD DETECTION EXPERIMENT RESULTS
+================================================================================
+
+      Configuration     Model       F1  Precision   Recall  AUC-ROC   AUC-PR  Training_Time  TP   TN  FP  FN
+  baseline_noweight   xgboost 0.611727   0.865471 0.473039 0.860390 0.558502       1.708965 193 8403  30 215
+engineered_noweight   xgboost 0.605016   0.839130 0.473039 0.862703 0.558925       1.804497 193 8396  37 215
+    baseline_weight   xgboost 0.598187   0.779528 0.485294 0.853308 0.561626       2.484722 198 8377  56 210
+  engineered_weight   xgboost 0.563218   0.680556 0.480392 0.850086 0.555537       2.641840 196 8341  92 212
+engineered_noweight graphsage 0.534954   0.704000 0.431373 0.825651 0.451885       7.866279 176 8359  74 232
+  baseline_noweight graphsage 0.527869   0.797030 0.394608 0.835828 0.499683       6.866172 161 8392  41 247
+    baseline_weight graphsage 0.524638   0.641844 0.443627 0.854597 0.487764       5.180152 181 8332 101 227
+  engineered_weight graphsage 0.501982   0.544413 0.465686 0.813599 0.445418       4.925374 190 8274 159 218
+engineered_noweight       gcn 0.470939   0.600760 0.387255 0.840410 0.468910       5.123030 158 8328 105 250
+    baseline_weight       gcn 0.437659   0.455026 0.421569 0.825978 0.430938       3.438548 172 8227 206 236
+  engineered_weight       gcn 0.410367   0.366795 0.465686 0.852214 0.449975       3.343443 190 8105 328 218
+    baseline_weight       gat 0.354651   0.293269 0.448529 0.855488 0.364895      11.808724 183 7992 441 225
+  baseline_noweight       gat 0.350543   0.393293 0.316176 0.802768 0.267065       8.690993 129 8234 199 279
+  baseline_noweight       gcn 0.342308   0.794643 0.218137 0.823954 0.407579       4.279454  89 8410  23 319
+engineered_noweight       gat 0.336516   0.327907 0.345588 0.800493 0.261183       5.649523 141 8144 289 267
+  engineered_weight       gat 0.312404   0.227171 0.500000 0.813784 0.447952      11.854056 204 7739 694 204
+
+Best Configuration: baseline_noweight
+Best Model: xgboost
+Best F1 Score: 0.6117
+Best AUC-ROC: 0.8604

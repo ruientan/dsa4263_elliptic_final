@@ -1,0 +1,3 @@
+Configuration,Model,Precision,Recall,F1,AUC_PR,AUC_ROC,TP,FP,FN,TN
+engineered_weight_tuned,xgboost_tuned,0.9346,0.4902,0.6431,0.6837,0.9442,200,14,208,8419
+engineered_weight,xgboost_original,0.7398,0.4877,0.5879,0.5617,0.8544,199,70,209,8363

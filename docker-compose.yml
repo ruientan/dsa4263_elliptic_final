@@ -1,0 +1,33 @@
+services:
+  fraud-detection:
+    build: .
+    image: bitcoin-fraud-detection:latest
+    container_name: fraud_detection_experiments
+
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+    # Mount data and results
+    volumes:
+      - ./data:/app/data:ro          # Read-only data
+      - ./results:/app/results        # Save results here
+      - ./models:/app/models          # Save trained models here
+
+    # Environment variables
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTHONUNBUFFERED=1
+
+    # Command override (optional - can customize when running)
+    # command: python3 run_full_experiments.py --models xgboost graphsage --epochs 100
+
+    shm_size: '8gb'  # Increase shared memory for DataLoader workers
+
+    # Restart policy
+    restart: "no"

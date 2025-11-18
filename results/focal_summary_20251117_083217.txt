@@ -1,0 +1,33 @@
+FOCAL LOSS EXPERIMENT RESULTS
+================================================================================
+
+
+GRAPHSAGE:
+--------------------------------------------------------------------------------
+                experiment   features       f1  precision   recall  auc_roc
+graphsage_engineered_focal engineered 0.512156   0.755981 0.387255 0.810762
+  graphsage_baseline_focal   baseline 0.424581   0.883721 0.279412 0.829670
+
+
+GCN:
+--------------------------------------------------------------------------------
+          experiment   features       f1  precision   recall  auc_roc
+gcn_engineered_focal engineered 0.468208   0.570423 0.397059 0.854782
+  gcn_baseline_focal   baseline 0.353635   0.891089 0.220588 0.820103
+
+
+GAT:
+--------------------------------------------------------------------------------
+          experiment   features       f1  precision   recall  auc_roc
+gat_engineered_focal engineered 0.335234   0.313433 0.360294 0.810563
+  gat_baseline_focal   baseline 0.313669   0.379791 0.267157 0.794608
+
+
+TOP RESULTS:
+================================================================================
+                experiment     model   features       f1  precision   recall  auc_roc
+graphsage_engineered_focal graphsage engineered 0.512156   0.755981 0.387255 0.810762
+      gcn_engineered_focal       gcn engineered 0.468208   0.570423 0.397059 0.854782
+  graphsage_baseline_focal graphsage   baseline 0.424581   0.883721 0.279412 0.829670
+        gcn_baseline_focal       gcn   baseline 0.353635   0.891089 0.220588 0.820103
+      gat_engineered_focal       gat engineered 0.335234   0.313433 0.360294 0.810563

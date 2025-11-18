@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+# Git
+.git/
+.gitignore
+
+# models and results (mounted as volumes)
+models/
+results/
+Dockerfile
+docker-compose.yml
+.dockerignore
