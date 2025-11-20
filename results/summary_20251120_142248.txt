@@ -1,0 +1,17 @@
+FRAUD DETECTION EXPERIMENT RESULTS
+================================================================================
+
+    Configuration     Model       F1  Precision   Recall  AUC-ROC   AUC-PR  Training_Time  TP   TN  FP  FN
+engineered_weight   xgboost 0.587888   0.739777 0.487745 0.854413 0.561737       1.850320 199 8363  70 209
+  baseline_weight   xgboost 0.594268   0.772549 0.482843 0.857145 0.562790       1.696643 197 8375  58 211
+  baseline_weight graphsage 0.552672   0.732794 0.443627 0.838618 0.517328     182.894714 181 8367  66 227
+engineered_weight graphsage 0.526799   0.702041 0.421569 0.828845 0.487775     176.686212 172 8360  73 236
+engineered_weight       gcn 0.393443   0.376682 0.411765 0.829381 0.399067     188.770707 168 8155 278 240
+  baseline_weight       gcn 0.438569   0.600000 0.345588 0.824181 0.445448     100.881818 141 8339  94 267
+
+Best Configuration (by Recall → AUC-PR → F1): engineered_weight
+Best Model: xgboost
+Recall: 0.4877
+AUC-PR: 0.5617
+F1: 0.5879
+AUC-ROC: 0.8544

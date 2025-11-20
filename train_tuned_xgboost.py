@@ -6,6 +6,7 @@ import os
 import json
 import numpy as np
 import xgboost as xgb
+import random
 
 from sklearn.metrics import (
     precision_score,
@@ -18,6 +19,11 @@ from sklearn.metrics import (
 
 from data_loader import EllipticDataLoader
 
+SEED = 42
+
+random.seed(SEED)
+np.random.seed(SEED)
+os.environ["PYTHONHASHSEED"] = str(SEED)
 
 def evaluate_metrics(y_true, y_pred, y_prob):
     """Compute evaluation metrics into a dict."""
@@ -85,7 +91,7 @@ def main():
         objective="binary:logistic",
         eval_metric="logloss",
         tree_method="hist",
-        random_state=42,
+        random_state=SEED,
         **best_params,
     )
 

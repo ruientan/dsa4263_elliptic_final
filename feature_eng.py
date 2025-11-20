@@ -46,7 +46,7 @@ class FeatureEngineer:
             (df['out_BTC_max'] - df['out_BTC_min']) /
             (df['out_BTC_mean'] + 1e-9)
         )
-        df['equal_split_flag'] = (df['out_range_ratio'] < 0.2).astype(int)
+        df['equal_split_flag'] = (df['out_range_ratio'] < 0.1).astype(int)
 
         df['peel_chain_flag'] = (
             (df['fan_in'] == 1) &

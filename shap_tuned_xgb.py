@@ -5,9 +5,15 @@ import shap
 import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
+import random
 
 from data_loader import EllipticDataLoader
 from feature_eng import FeatureEngineer
+
+SEED = 42
+np.random.seed(SEED)
+random.seed(SEED)
+os.environ["PYTHONHASHSEED"] = str(SEED)
 
 # -------------------------------------------------------------------
 # 1. Load tuned model

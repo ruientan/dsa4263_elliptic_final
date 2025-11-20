@@ -4,6 +4,19 @@ import xgboost as xgb
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import average_precision_score, make_scorer
 from data_loader import EllipticDataLoader
+import random
+import os
+
+SEED = 42
+
+# Python RNG
+random.seed(SEED)
+
+# NumPy RNG
+np.random.seed(SEED)
+
+# Python hashing determinism
+os.environ["PYTHONHASHSEED"] = str(SEED)
 
 print("Loading data...")
 loader = EllipticDataLoader(data_dir="data")
@@ -26,7 +39,7 @@ print("Scale_pos_weight:", scale_pos)
 model = xgb.XGBClassifier(
     objective="binary:logistic",
     eval_metric="logloss",
-    random_state=42,
+    random_state=SEED,
     tree_method="hist"
 )
 
@@ -50,7 +63,8 @@ search = RandomizedSearchCV(
     scoring=scorer,
     cv=3,
     verbose=2,
-    n_jobs=-1
+    n_jobs=-1,
+    random_state=SEED
 )
 
 print("Running tuning...")

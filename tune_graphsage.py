@@ -11,7 +11,7 @@ import os
 import json
 import time
 import itertools
-
+import random
 import numpy as np
 import torch
 import torch.optim as optim
@@ -28,6 +28,21 @@ from sklearn.metrics import (
 from data_loader import EllipticDataLoader
 from models import get_model, WeightedBCELoss
 
+SEED = 42
+
+random.seed(SEED)
+
+np.random.seed(SEED)
+
+torch.manual_seed(SEED)
+torch.cuda.manual_seed(SEED)
+torch.cuda.manual_seed_all(SEED)
+
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+torch.use_deterministic_algorithms(True)
+
+os.environ["PYTHONHASHSEED"] = str(SEED)
 
 # ---------- Helper: metric computation (same style as your suite) ----------
 def evaluate_metrics(y_true, y_pred, y_prob=None):

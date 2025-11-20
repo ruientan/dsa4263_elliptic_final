@@ -14,6 +14,7 @@ import os
 import json
 import pickle
 import numpy as np
+import random
 
 import torch
 from sklearn.metrics import (
@@ -24,6 +25,17 @@ from sklearn.metrics import (
 
 from data_loader import EllipticDataLoader
 from models import get_model
+
+SEED = 42
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.cuda.manual_seed(SEED)
+torch.cuda.manual_seed_all(SEED)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+os.environ["PYTHONHASHSEED"] = str(SEED)
 
 # Metric helper
 def evaluate_metrics(y_true, y_pred, y_prob=None):

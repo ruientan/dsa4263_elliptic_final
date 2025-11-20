@@ -3,6 +3,7 @@ import time
 import argparse
 import numpy as np
 import pandas as pd
+import random
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -11,6 +12,20 @@ from sklearn.metrics import confusion_matrix
 import xgboost as xgb
 import pickle
 import json
+
+SEED = 42
+
+os.environ["PYTHONHASHSEED"] = str(SEED)
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.cuda.manual_seed(SEED)
+torch.cuda.manual_seed_all(SEED)
+
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+torch.use_deterministic_algorithms(True)
 
 from data_loader import EllipticDataLoader
 from feature_eng import FeatureEngineer
@@ -125,7 +140,9 @@ def train_xgboost(X_train, y_train, X_val, y_val, X_test, y_test, use_class_weig
         'learning_rate': 0.1,
         'n_estimators': 100,
         'scale_pos_weight': scale_pos_weight,
-        'early_stopping_rounds': 20
+        'early_stopping_rounds': 20,
+        'random_state': SEED,
+        'seed': SEED
     }
 
     model = xgb.XGBClassifier(**params)

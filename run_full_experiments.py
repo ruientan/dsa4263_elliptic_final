@@ -17,12 +17,32 @@ from sklearn.metrics import confusion_matrix, classification_report
 import xgboost as xgb
 import pickle
 import json
+import random
 from datetime import datetime
 
 from data_loader import EllipticDataLoader
 from feature_eng import FeatureEngineer
 from models import get_model, FocalLoss, WeightedBCELoss
 
+SEED = 42
+
+# Python RNG
+random.seed(SEED)
+
+# NumPy RNG
+np.random.seed(SEED)
+
+# PyTorch RNG
+torch.manual_seed(SEED)
+torch.cuda.manual_seed(SEED)
+torch.cuda.manual_seed_all(SEED)
+
+# Make cuDNN deterministic
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+
+# Python hash seed (important!)
+os.environ["PYTHONHASHSEED"] = str(SEED)
 
 def evaluate_metrics(y_true, y_pred, y_prob=None):
     """Compute comprehensive evaluation metrics"""
@@ -175,7 +195,8 @@ def train_xgboost(X_train, y_train, X_val, y_val, X_test, y_test,
         'subsample': 0.8,
         'colsample_bytree': 0.8,
         'early_stopping_rounds': 30,
-        'random_state': 42
+        'random_state': SEED,
+        'seed': SEED,
     }
 
     training_start = time.time()
