@@ -44,6 +44,19 @@ orig_gcn = {
     "TN": 8155,
 }
 
+orig_gcn_bw = {
+    "Model": "GCN (Baseline Weight)",
+    "Precision": 0.600000,
+    "Recall": 0.345588,
+    "F1": 0.438569,
+    "AUC_PR": 0.445448,
+    "AUC_ROC": 0.824181,
+    "TP": 141,
+    "FP": 94,
+    "FN": 267,
+    "TN": 8339,
+}
+
 # ===============================
 # TUNED XGBOOST (engineered_weight)
 # Read from JSON: xgboost_engineered_weight_tuned_test_metrics.json
@@ -81,6 +94,7 @@ df = pd.DataFrame([
     tuned_xgb,
     orig_sage,
     orig_gcn,
+    orig_gcn_bw,
 ])
 
 # Priority: Recall → AUC-PR → F1 (descending)
