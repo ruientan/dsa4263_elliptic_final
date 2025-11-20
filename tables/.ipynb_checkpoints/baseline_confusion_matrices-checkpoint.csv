@@ -1,0 +1,5 @@
+model,PredP_ActP_TP,PredP_ActN_FP,PredN_ActP_FN,PredN_ActN_TN
+xgboost,199,70,209,8363
+gat,190,498,218,7935
+graphsage,190,190,218,8243
+gcn,183,343,225,8090

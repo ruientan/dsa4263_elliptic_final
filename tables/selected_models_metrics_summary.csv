@@ -1,0 +1,6 @@
+model,precision,recall,f1,auc_roc,auc_pr,tn,fp,fn,tp,best_val_f1,training_time
+xgb_engineered_weight,0.7398,0.4877,0.5879,0.8544,0.5617,8363,70,209,199,,1.8503
+ensemble_graphsage_xgb_engineered_weight,0.8525,0.4534,0.592,0.8505,0.5495,8401,32,223,185,,
+graphsage_engineered_weight,0.702,0.4216,0.5268,0.8288,0.4878,8360,73,236,172,0.7888,176.6862
+gcn_engineered_weight,0.3767,0.4118,0.3934,0.8294,0.3991,8155,278,240,168,0.7383,188.7707
+gcn_baseline_weight,0.6,0.3456,0.4386,0.8242,0.4454,8339,94,267,141,0.6815,100.8818

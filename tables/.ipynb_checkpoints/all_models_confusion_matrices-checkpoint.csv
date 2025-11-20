@@ -1,0 +1,5 @@
+model,tn,fp,fn,tp
+gcn_tuned,8186,247,228,180
+xgboost_tuned,8419,14,208,200
+graphsage_tuned,8323,110,225,183
+ensemble_graphsage_xgb,8368,65,212,196

@@ -3,3 +3,6 @@ __pycache__/
 
 # Data files (too large for GitHub - 663MB)
 data/
+
+/.ipynb_checkpoints/
+results/.ipynb_checkpoints/
