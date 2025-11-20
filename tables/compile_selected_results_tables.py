@@ -47,6 +47,15 @@ MODEL_RESULTS = [
         "metrics_key": None,
         "config_name": None,
         "model_key": None
+    },
+
+    # 6. Fine-tune: XGB engineered_weight (engineered features + class weights = True)
+    {
+        "name": "xgb_engineered_weight_tuned",
+        "path": "results/xgb_engineered_weight_tuned_test_metrics.json",
+        "metrics_key": None,
+        "config_name": None,
+        "model_key": None
     }
 ]
 

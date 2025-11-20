@@ -1,4 +1,5 @@
 model,precision,recall,f1,auc_roc,auc_pr,tn,fp,fn,tp,best_val_f1,training_time
+xgb_engineered_weight_tuned,0.8511,0.4902,0.6221,0.938,0.6529,8398,35,208,200,,
 xgb_engineered_weight,0.7398,0.4877,0.5879,0.8544,0.5617,8363,70,209,199,,1.8503
 ensemble_graphsage_xgb_engineered_weight,0.8525,0.4534,0.592,0.8505,0.5495,8401,32,223,185,,
 graphsage_engineered_weight,0.702,0.4216,0.5268,0.8288,0.4878,8360,73,236,172,0.7888,176.6862
