@@ -1,0 +1,84 @@
+# Elliptic++ Bitcoin Transaction Dataset – Data Dictionary
+
+## 1. Transaction Classes
+
+* **Shape:** (203,769, 2)
+* **Purpose:** Labels each transaction as licit, illicit, or unknown.
+
+| Column  | Description                                       |
+| ------- | ------------------------------------------------- |
+| `txId`  | Unique transaction identifier                     |
+| `class` | Transaction class (`licit`, `illicit`, `unknown`) |
+
+---
+
+## 2. Edgelist
+
+* **Shape:** (234,355, 2)
+* **Purpose:** Represents the transaction-to-transaction network, where edges indicate Bitcoin flows between transactions.
+
+| Column  | Description             |
+| ------- | ----------------------- |
+| `txId1` | Sender transaction ID   |
+| `txId2` | Receiver transaction ID |
+
+---
+
+## 3. Transaction Features
+
+* **Shape:** (203,769, 184)
+* **Purpose:** Feature matrix for each transaction, including local features (transaction-specific), aggregate features (graph-level info), and Bitcoin amounts.
+
+### Local Features (1–93)
+
+`Local_feature_1` to `Local_feature_93`: Includes time step, number of inputs/outputs, transaction fee, output volume and aggregated figures such as average BTC received by the inputs/outputs and average number of incoming transactions associated with the inputs/outputs
+
+### Aggregate Features (1–72)
+
+`Aggregate_feature_1` to `Aggregate_feature_72`: Features aggregated over the transaction’s neighborhood in the transaction graph. The features are obtained using transaction information one-hop backward/forward from the center node which gives the maximum, minimum, standard deviation and correlation coefficients of the neighbour transactions for the same information data (number of inputs/outputs, transaction fee, etc.).
+
+### Graph & Transaction Attributes
+
+| Column                 | Description                                  |
+| ---------------------- | -------------------------------------------- |
+| `in_txs_degree`        | Number of incoming transactions (in-degree)  |
+| `out_txs_degree`       | Number of outgoing transactions (out-degree) |
+| `total_BTC`            | Total Bitcoin transferred in the transaction |
+| `fees`                 | Transaction fees                             |
+| `size`                 | Transaction size in bytes                    |
+| `num_input_addresses`  | Number of input addresses                    |
+| `num_output_addresses` | Number of output addresses                   |
+| `in_BTC_min`           | Minimum BTC from input addresses             |
+| `in_BTC_max`           | Maximum BTC from input addresses             |
+| `in_BTC_mean`          | Mean BTC from input addresses                |
+| `in_BTC_median`        | Median BTC from input addresses              |
+| `in_BTC_total`         | Total BTC from input addresses               |
+| `out_BTC_min`          | Minimum BTC sent to outputs                  |
+| `out_BTC_max`          | Maximum BTC sent to outputs                  |
+| `out_BTC_mean`         | Mean BTC sent to outputs                     |
+| `out_BTC_median`       | Median BTC sent to outputs                   |
+| `out_BTC_total`        | Total BTC sent to outputs                    |
+
+---
+
+## 4. Address-to-Transaction Edges
+
+* **Shape:** (477,117, 2)
+* **Purpose:** Connects Bitcoin addresses to transactions in which they participate (input or output).
+
+| Column    | Description                                 |
+| --------- | ------------------------------------------- |
+| `address` | Bitcoin address                             |
+| `txId`    | Transaction ID associated with this address |
+
+---
+
+## 5. Transaction-to-Address Edges
+
+* **Shape:** (837,124, 2)
+* **Purpose:** Connects transactions to their output addresses, capturing Bitcoin flow from transactions to addresses.
+
+| Column    | Description            |
+| --------- | ---------------------- |
+| `txId`    | Transaction ID         |
+| `address` | Output Bitcoin address |
