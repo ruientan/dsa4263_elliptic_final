@@ -17,26 +17,26 @@ trained models already in `models/` so only download if retraining
 
 ## dataset structure
 ```
-                           +----------------------------+
-                           |     Transaction Classes    |
-                           |   (txId -> {licit/illicit, |
-                           |           unknown})        |
-                           +----------------------------+
-                                      |
-                                      | 1-to-1
-                                      v
-                           +----------------------------+
-                           |     Transaction Features   |
-                           |   (183-dimensional features)|
-                           +----------------------------+
-                                      |
-        -----------------------------------------------------------------------
-        |                              |                                     |
-        v                              v                                     v
-+--------------------+     +---------------------+          +---------------------+
-|  Transaction-Tx    |     |   Address->Tx Edges |          |   Tx->Address Edges |
-|      Edges         |     | (funding inputs)    |          | (sending outputs)   |
-+--------------------+     +---------------------+          +---------------------+
+                                            +----------------------------+
+                                            |     Transaction Classes    |
+                                            |   (txId -> {licit/illicit, |
+                                            |           unknown})        |
+                                            +----------------------------+
+                                                        |
+                                                        | 1-to-1
+                                                        v
+                                            +----------------------------+
+                                            |     Transaction Features   |
+                                            |   (183-dimensional features)|
+                                            +----------------------------+
+                                                        |
+                            -----------------------------------------------------------------------
+                            |                              |                                     |
+                            v                              v                                     v
+                    +--------------------+     +---------------------+          +---------------------+
+                    |  Transaction-Tx    |     |   Address->Tx Edges |          |   Tx->Address Edges |
+                    |      Edges         |     | (funding inputs)    |          | (sending outputs)   |
+                    +--------------------+     +---------------------+          +---------------------+
 ```
 
 
