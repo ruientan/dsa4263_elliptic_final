@@ -16,25 +16,37 @@ put these in `data/`:
 trained models already in `models/` so only download if retraining
 
 ## dataset structure
-                       ┌────────────────────────────────────┐
-                       │        Transaction Classes         │
-                       │   (txId → {licit/illicit/unknown}) │
-                       └───────────────┬────────────────────┘
-                                       │ 1-to-1
-                                       ▼
-                     ┌──────────────────────────────────────┐
-                     │        Transaction Features           │
-                     │    (183-dimensional node features)    │
-                     └───────────────┬──────────────────────┘
-                                     │
-          ┌──────────────────────────┼─────────────────────────────┐
-          ▼                          ▼                             ▼
-┌─────────────────────┐     ┌────────────────────┐       ┌────────────────────┐
-│ Transaction–Tx Edges │    │ Address→Tx Edges    │      │ Tx→Address Edges    │
-│   (payment flows)    │    │ (funding inputs)    │      │ (sending outputs)   │
-└─────────────────────┘     └────────────────────┘       └────────────────────┘
+```
+                           +----------------------------+
+                           |     Transaction Classes    |
+                           |   (txId -> {licit/illicit, |
+                           |           unknown})        |
+                           +----------------------------+
+                                      |
+                                      | 1-to-1
+                                      v
+                           +----------------------------+
+                           |     Transaction Features   |
+                           |   (183-dimensional features)|
+                           +----------------------------+
+                                      |
+        -----------------------------------------------------------------------
+        |                              |                                     |
+        v                              v                                     v
++--------------------+     +---------------------+          +---------------------+
+|  Transaction-Tx    |     |   Address->Tx Edges |          |   Tx->Address Edges |
+|      Edges         |     | (funding inputs)    |          | (sending outputs)   |
++--------------------+     +---------------------+          +---------------------+
+```
 
 
+| Dataset               | Shape                          | Description                                                                        |
+|-----------------------|--------------------------------|------------------------------------------------------------------------------------|
+| Transaction classes   | 203,769 rows × 2 columns       | Each row contains a transaction ID (txId) and its class label (licit, illicit, unknown). |
+| Transaction features   | 203,769 rows × 183 columns       | Node-level features of local transaction metrics, aggregated behaviour over neighbours, temporal data, and Bitcoin flow data |
+| Tx-tx Edges   | 234,355 rows × 2 columns       | Directed edges representing payment flows between transactions |
+| Address-tx Edges   | 466,117 rows × 2 columns       | Links showing which addresses funded a given transaction |
+| Tx-Address Edges   | 837,124 rows × 2 columns       | Links showing which addresses received outputs from each transaction |
 
 ## setup
 ```
