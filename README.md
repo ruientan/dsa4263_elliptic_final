@@ -126,19 +126,19 @@ DSA4213-Assignment3/
 ├── .dockerignore
 ├── .gitignore
 ├── data_dictionary.txt
-│
+|
 ├── data_loader.py                   # temporal split + PyG graph construction
-│
+|
 ├── docker-compose.yml               # reproducible GPU-enabled environment
 ├── Dockerfile                       # container build instructions
-│
+|
 ├── ensemble_graphsage_xgboost.py    # GraphSAGE + XGBoost ensemble
 ├── feature_eng.py                   # engineered feature generation
 ├── models.py                        # model classes
 │
 ├── README.md       
 ├── requirements.txt                 # Dependencies
-│
+|
 ├── results_analysis.ipynb           # result analysis notebook         
 ├── run_focal_experiments.py         # focal loss experiment runer
 ├── run_full_experiments.py          # main experiment runner
