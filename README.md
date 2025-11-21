@@ -91,7 +91,7 @@ best model: tuned engineered_weight xgboost (recall=0.4902, auc-pr=0.6529)
 
 
 ## Focal Loss vs Weighted CE
-### graphsage
+### GraphSAGE
 | dataset | loss | f1 | precision | recall | auc-roc |
 |---------|------|-----|-----------|--------|---------|
 | baseline | ce | 0.536 | 0.860 | 0.390 | 0.834 |
@@ -99,7 +99,7 @@ best model: tuned engineered_weight xgboost (recall=0.4902, auc-pr=0.6529)
 | augmented | ce | 0.510 | 0.870 | 0.360 | 0.809 |
 | baseline | focal | 0.425 | 0.884 | 0.279 | 0.830 |
 
-### gcn
+### GCN
 | dataset | loss | f1 | precision | recall | auc-roc |
 |---------|------|-----|-----------|--------|---------|
 | augmented | focal | 0.468 | 0.570 | 0.397 | 0.855 |
@@ -150,7 +150,7 @@ DSA4213-Assignment3/
 ```
 
 ---
-## citation
+## Citation
 If you use this code, please cite:
 
 Elliptic Dataset:  
