@@ -3,19 +3,24 @@ The Elliptic dataset is a graph-structured cryptocurrency transaction dataset de
 
 The dataset was constructed using blockchain ledger data compiled by Elliptic directly from a Bitcoin blockchain. The dataset represents a sub-graph of the bitcoin blockchain in a Directed Acyclic Graph (DAG), where the in-degree of a node represents the number of inputs of a transaction, while the out-degree represents the number of outputs of a transaction. Alongside the graph metadata, the dataset categorises the nodes into three classes: **licit**, **illicit**, and **unknown**. A node is considered **illicit** if the transaction has been created by an entity that is considered fraudulent, such as scam networks, malware, terrorist organisations, ransomware, and Ponzi scams, among others.
 
-## Data folder
-Trained models are saved in `models/` already, hence there is no need to download the data.
-
-However, if you want to re-train models, download Elliptic csv files from their google drive: https://drive.google.com/drive/folders/1MRPXz79Lu_JGLlJ21MDfML44dKN9R08l
-
-Put these in `data/`:
+## Data
+### 1. Raw datasets
+Most of the raw datasets used for training the models can be found in `data/`:
 - AddrTx_edgelist.csv
 - TxAddr_edgelist.csv
 - txs_classes.csv
 - txs_edgelist.csv
-- txs_features.csv (663mb warning)
 
-## Dataset Structure
+However, one of the raw dataset (txs_features.csv) is too large to be pushed into GitHub (~663mb). That dataset can be found and downloaded from this Google Drive: https://drive.google.com/drive/folders/1MRPXz79Lu_JGLlJ21MDfML44dKN9R08l
+
+After downloading it, place that dataset into `data/`.
+
+However, there is no need to re-train the models as they have been trained and saved into `models/` already.
+
+### 2. Processed datasets
+Feature engineering was done on the dataset. However, the processed dataset is not saved into this repository as the code performs feature engineering on the raw dataset when `run_full_experiments.py` is run. 
+
+### 3. Dataset Structure
 ```
                                             +----------------------------+
                                             |     Transaction Classes    |
@@ -48,6 +53,15 @@ Put these in `data/`:
 | Address-tx Edges   | 466,117 rows × 2 columns       | Links showing which addresses funded a given transaction |
 | Tx-Address Edges   | 837,124 rows × 2 columns       | Links showing which addresses received outputs from each transaction |
 
+### 4. Train / Val / Test Splits
+
+- **Train:** timesteps 1–34  
+- **Validation:** timesteps 35–41  
+- **Test:** timesteps 42+  
+
+No future information leaks into training.  
+All scalers are fit **only** on training data.
+
 ## Setup
 ```
 docker-compose build
@@ -60,16 +74,6 @@ docker-compose run --rm fraud-detection python3 run_full_experiments.py --models
 docker-compose run --rm fraud-detection python3 run_full_experiments.py --configs engineered_weight
 ```
 
-## Train / Val / Test Split
-
-- **Train:** timesteps 1–34  
-- **Validation:** timesteps 35–41  
-- **Test:** timesteps 42+  
-
-No future information leaks into training.  
-All scalers are fit **only** on training data.
-
-
 ## Output
 - Results are saved to `results/` - check summary_(timestamp).txt for readable results.
 - Models are saved to `models/` as {config}_{model}_model.pt or .pkl where config is baseline_noweight, baseline_weight, engineered_noweight, and engineered_weight.
@@ -77,8 +81,8 @@ All scalers are fit **only** on training data.
 **Best model:** tuned engineered_weight xgboost (recall=0.4902, auc-pr=0.6529)
 
 
-# Results
-## Overall summary
+## Results
+### Overall Summary
 | model | weights | f1 | precision | recall | auc-roc | auc-pr | tp | tn | fp | fn |
 |-------|---------|-----|-----------|--------|---------|--------|----|----|----|----|
 | xgboost (tuned) | yes | 0.6221 | 0.8511 | **0.4902** | 0.9380 | **0.6529** | 200 | 8398 | 35 | 208 |
@@ -89,8 +93,8 @@ All scalers are fit **only** on training data.
 | gcn (baseline) | yes | 0.4386 | 0.6000 | 0.3456 | 0.8242 | 0.4454 | 141 | 8339 | 94 | 267 |
 
 
-## Focal Loss vs Weighted CE
-### GraphSAGE
+### Focal Loss vs Weighted CE
+#### GraphSAGE
 | dataset | loss | f1 | precision | recall | auc-roc |
 |---------|------|-----|-----------|--------|---------|
 | baseline | ce | 0.536 | 0.860 | 0.390 | 0.834 |
@@ -98,7 +102,7 @@ All scalers are fit **only** on training data.
 | augmented | ce | 0.510 | 0.870 | 0.360 | 0.809 |
 | baseline | focal | 0.425 | 0.884 | 0.279 | 0.830 |
 
-### GCN
+#### GCN
 | dataset | loss | f1 | precision | recall | auc-roc |
 |---------|------|-----|-----------|--------|---------|
 | augmented | focal | 0.468 | 0.570 | 0.397 | 0.855 |
@@ -106,7 +110,7 @@ All scalers are fit **only** on training data.
 | baseline | focal | 0.354 | 0.891 | 0.221 | 0.820 |
 | baseline | ce | 0.342 | 0.795 | 0.218 | 0.824 |
 
-## Key Findings
+### Key Findings
 - XGBoost significantly outperforms all GNN models on recall and AUC-PR.  
 - Engineered features contribute more predictive signal than graph message passing.  
 - Weighted Cross-Entropy consistently outperforms Focal Loss on this dataset.  
@@ -114,7 +118,7 @@ All scalers are fit **only** on training data.
 
 ---
 
-## Project Structure
+## Repository Structure
 ```
 DSA4213-Assignment3/
 │

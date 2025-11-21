@@ -1,8 +1,8 @@
 __pycache__/
 *.pyc
 
-# Data files (too large for GitHub - 663MB)
-data/
+# Data file (too large for GitHub - 663MB)
+data/txs_features.csv
 
 /.ipynb_checkpoints/
 results/.ipynb_checkpoints/
