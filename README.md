@@ -30,8 +30,8 @@ trained models already in `models/` so only download if retraining
           ┌──────────────────────────┼─────────────────────────────┐
           ▼                          ▼                             ▼
 ┌─────────────────────┐     ┌────────────────────┐       ┌────────────────────┐
-│ Transaction–Tx Edges│     │ Address→Tx Edges   │       │ Tx→Address Edges   │
-│   (payment flows)   │     │ (funding inputs)   │       │ (sending outputs)  │
+│ Transaction–Tx Edges │    │ Address→Tx Edges    │      │ Tx→Address Edges    │
+│   (payment flows)    │    │ (funding inputs)    │      │ (sending outputs)   │
 └─────────────────────┘     └────────────────────┘       └────────────────────┘
 
 
