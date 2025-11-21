@@ -1,10 +1,12 @@
 # Elliptic Dataset
-The Elliptic dataset is a graph-structured cryptocurrency transaction dataset designed to support illicit activity and fraud detection, and blockchain network analysis. It is a time series graph of over 200k Bitcoin transactions (nodes) with a total value of $6 billion, 234k directed payment flow (edges), and 183 node features, and is the largest labelled cryptocurrency transaction dataset publicly available.
+The Elliptic dataset is a graph-structured cryptocurrency transaction dataset designed to support the detection of illicit activity and fraud, and blockchain network analysis. It is a time series graph of over 200k Bitcoin transactions (nodes) with a total value of $6 billion, 234k directed payment flow (edges), and 183 node features, and it is the largest labelled cryptocurrency transaction dataset publicly available.
 
-The dataset was constructed using blockchain ledger data compiled by Elliptic directly from a Bitcoin blockchain. The dataset represents a sub-graph of the bitcoin blockchain in a Directed Acyclic Graph (DAG), where the in-degree of a node represents the number of inputs of a transaction, while the our-degree represents the number of outputs of a transaction. Alongside the graph metadata, the dataset categorizes the nodes into three classes: **licit**, **illicit**, and **unknown**. A node is considered **illicit** if the transaction has been created by an entity that is considered fraudulent, such as scam networks, malware, terrorist organisations, ransomware, Ponzi scams, among others.
+The dataset was constructed using blockchain ledger data compiled by Elliptic directly from a Bitcoin blockchain. The dataset represents a sub-graph of the bitcoin blockchain in a Directed Acyclic Graph (DAG), where the in-degree of a node represents the number of inputs of a transaction, while the out-degree represents the number of outputs of a transaction. Alongside the graph metadata, the dataset categorises the nodes into three classes: **licit**, **illicit**, and **unknown**. A node is considered **illicit** if the transaction has been created by an entity that is considered fraudulent, such as scam networks, malware, terrorist organisations, ransomware, and Ponzi scams, among others.
 
 ## Data folder
-If you want to re-train models, download Elliptic csv files from their google drive: https://drive.google.com/drive/folders/1MRPXz79Lu_JGLlJ21MDfML44dKN9R08l
+Trained models are saved in `models/` already, hence there is no need to download the data.
+
+However, if you want to re-train models, download Elliptic csv files from their google drive: https://drive.google.com/drive/folders/1MRPXz79Lu_JGLlJ21MDfML44dKN9R08l
 
 Put these in `data/`:
 - AddrTx_edgelist.csv
@@ -12,8 +14,6 @@ Put these in `data/`:
 - txs_classes.csv
 - txs_edgelist.csv
 - txs_features.csv (663mb warning)
-
-trained models already in `models/` so only download if retraining
 
 ## Dataset Structure
 ```
@@ -30,7 +30,7 @@ trained models already in `models/` so only download if retraining
                                             |   (183-dimensional features)|
                                             +----------------------------+
                                                         |
-                            -----------------------------------------------------------------------
+                            ----------------------------------------------------------------------
                             |                              |                                     |
                             v                              v                                     v
                     +--------------------+     +---------------------+          +---------------------+
@@ -53,10 +53,10 @@ trained models already in `models/` so only download if retraining
 docker-compose build
 docker-compose up
 
-#or to run specific models
+# or to run specific models
 docker-compose run --rm fraud-detection python3 run_full_experiments.py --models xgboost graphsage gcn --epochs 200
 
-#or specific configurations
+# or to run specific configurations
 docker-compose run --rm fraud-detection python3 run_full_experiments.py --configs engineered_weight
 ```
 
@@ -71,11 +71,10 @@ All scalers are fit **only** on training data.
 
 
 ## Output
-results saved to `results/` - check summary_(timestamp).txt for readable results
+- Results are saved to `results/` - check summary_(timestamp).txt for readable results.
+- Models are saved to `models/` as {config}_{model}_model.pt or .pkl where config is baseline_noweight, baseline_weight, engineered_noweight, and engineered_weight.
 
-models saved to `models/` as {config}_{model}_model.pt or .pkl where config is baseline_noweight, baseline_weight, engineered_noweight, engineered_weight
-
-best model: tuned engineered_weight xgboost (recall=0.4902, auc-pr=0.6529)
+**Best model:** tuned engineered_weight xgboost (recall=0.4902, auc-pr=0.6529)
 
 
 # Results
